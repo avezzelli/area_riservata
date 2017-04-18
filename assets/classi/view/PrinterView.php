@@ -262,8 +262,8 @@ class PrinterView {
     ?>
         <div class="form-group">
             <label class="control-label col-sm-2" for="<?php echo $nameField ?>" ><?php echo $label ?></label>
-            <div class="col-sm-10">  
-                <input class="counterable" name="<?php echo $nameField ?>" type="file" id="<?php echo $nameField ?>" <?php echo $optRequired ?> />    
+            <div class="col-sm-10">                  
+                <input accept="audio/*,video/*,image/*, text/*, application/*" class="counterable" name="<?php echo $nameField ?>" type="file" id="<?php echo $nameField ?>" <?php echo $optRequired ?> />    
             </div>
       </div>
     <?php

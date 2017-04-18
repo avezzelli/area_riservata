@@ -29,7 +29,28 @@ if(isset($_POST['submit'])){
     }
 }
 
-
+//LISTENER CANCELLA UTENTE
+if(isset($_POST['cancella-utente'])){            
+    //elimino tutti i file associati all'utente in questione
+    $fc = new FileController();    
+    if($fc->deleteFilesFromUtente($_POST['idUtente'])){
+        //elimino l'utente di wordpress
+        require_once(ABSPATH.'wp-admin/includes/user.php');
+        if(wp_delete_user($_POST['idUtente'])){
+            echo '<div class="alert alert-success">
+            <strong>OK! </strong> Utente eliminato con successo!
+        </div>';
+          
+           
+        }
+        else{
+            echo '<div class="alert alert-danger">
+            <strong>Errore! </strong> Errore nell\'eliminazione dell\'utente.
+        </div>';
+            
+        }
+    }
+}
 
 //OTTENGO GLI UTENTI
 $args = array(
@@ -38,9 +59,10 @@ $args = array(
 
 $users = get_users($args);
 
-
 ?>
-
+<a class="float-right" href="<?php echo wp_logout_url(curPageURL() )?>">
+    <span class="back-text">LOGOUT</span>
+</a>
 <div class="container-admin">
     <h2>Gestione area riservata</h2>
     <ul class="nav nav-tabs">
@@ -89,22 +111,46 @@ $users = get_users($args);
            
         <?php 
             $user = get_user_by('ID', $_GET['utente']);
-            $viewA = new FileView();
+            
         ?>
         
         <div id="utente" class="tab-pane fade">
+            <?php 
+                if($user != false){
+                    $viewA = new FileView();
+                $viewA->listenerFormInserimento();
+            ?>
             <h3>Dettaglio Utente</h3>
             <div class="col-xs-12 col-sm-3"><strong>Utente</strong><br><?php echo $user->user_login ?></div>
             <div class="col-xs-12 col-sm-3"><strong>Nome</strong><br><?php echo $user->user_firstname.' '.$u->last_name ?></div>
             <div class="col-xs-12 col-sm-3"><strong>Email</strong><br><?php echo $user->user_email ?></div>
         
             <div class="clear"></div>
+            <form action="<?php echo curPageURL() ?>" method="POST">
+                <input type="hidden" name="idUtente" value="<?php echo $_GET['utente'] ?>">
+                
+                <input class="float-right" type="submit" value="Cancella Utente" name="cancella-utente" />
+            </form>
+            
+            <div class="clear"></div>
+            <?php $viewA->printTabellaFiles($_GET['utente']) ?>
+            
+            <div class="clear"></div>
             <?php $viewA->printFormInserimentoFiles($user->ID) ?>
-        
+            <?php
+                }
+                else{
+                    echo '<p>L\'utente non è presente nel sistema.</p>';
+                }
+            ?>
+            <p class="clear" style="margin-top:40px"><strong>NOTA BENE</strong><br>Per sicurezza alcuni tipi di file non possono essere caricati direttamente. Per ovviare questo problema si consiglia di inserirlo in un archivio .zip o .rar e ricaricare il tutto. </p>
         </div> 
         
                
-        <?php } ?>
+        <?php 
+            
+        
+            }?>
         
         
         <div id="crea" class="tab-pane fade">
@@ -131,7 +177,8 @@ $users = get_users($args);
                     <label for="InputCogome">Cognome</label>
                     <input type="text" class="form-control" name="InputCognome" id="InputCognome" placeholder="Cognome">
                 </div> 
-                <button type="submit" name="submit" class="btn btn-default">Crea Utente</button>
+                <button class="float-right" type="submit" name="submit" class="btn btn-default">Crea Utente</button>
             </form>
         </div>
     </div>
+    
