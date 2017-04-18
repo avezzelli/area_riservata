@@ -166,7 +166,7 @@ class FileView extends PrinterView {
            
             
             if($user->has_cap('administrator') || $user->has_cap('editor')){
-                $html.= '<td><a href="'.$f->getUrlFile().'" target="_blank">'.$nomeFile.'</a></td>';
+                $html.= '<td class="td-descrizione"><a href="'.$f->getUrlFile().'" target="_blank">'.$nomeFile.'</a></td>';
                 $html.= '<td>'
                         . '<form action="'. curPageURL().'" method="post" >'
                         . '<input type="hidden" name="ID" value="'.$f->getID().'" />'
@@ -176,7 +176,7 @@ class FileView extends PrinterView {
             }
             
             if($user->has_cap('subscriber')){
-                $html.='<td>'.$nomeFile.'</td>';
+                $html.='<td class="td-descrizione">'.$nomeFile.'</td>';
                 $html.='<td><a href="'.$f->getUrlFile().'" target="_blank">Apri / Scarica</a></td>';
             }
             

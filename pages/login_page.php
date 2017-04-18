@@ -2,6 +2,10 @@
 
 namespace area_riservata;
 
+?>
+<div class="container-area-riservata">
+    
+<?php
 if(is_user_logged_in()){
     $user = wp_get_current_user();
     if($user->has_cap('administrator')){
@@ -18,5 +22,7 @@ else{
    wp_login_form();
 }
 ?>
+
+</div>
 
 

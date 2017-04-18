@@ -1,3 +1,11 @@
 .float-right{
     float:right;
 }
+
+.container-area-riservata{
+    min-height:500px;
+}
+
+.td-descrizione{
+    text-align:left;
+}

@@ -76,7 +76,7 @@ $users = get_users($args);
     <div class="tab-content">
         <div id="view" class="tab-pane fade in active">
             <h3>Visualizza Utenti</h3>
-            <?php if(count($user) > 0){ ?>
+            <?php if(count($users) > 0){ ?>
                 <table class="table">
                     <thead>
                       <tr>
@@ -143,7 +143,8 @@ $users = get_users($args);
                     echo '<p>L\'utente non è presente nel sistema.</p>';
                 }
             ?>
-            <p class="clear" style="margin-top:40px"><strong>NOTA BENE</strong><br>Per sicurezza alcuni tipi di file non possono essere caricati direttamente. Per ovviare questo problema si consiglia di inserirlo in un archivio .zip o .rar e ricaricare il tutto. </p>
+            <div class="clear"></div>
+            <p style="margin-top:40px"><strong>NOTA BENE</strong><br>Per sicurezza alcuni tipi di file non possono essere caricati direttamente. Per ovviare questo problema si consiglia di inserirlo in un archivio .zip o .rar e ricaricare il tutto. </p>
         </div> 
         
                
