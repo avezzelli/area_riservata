@@ -68,13 +68,13 @@ add_action( 'wp_enqueue_scripts', 'register_ar_styles' );
 
 //JS PUBLIC
 function register_ar_js_script(){   
-    wp_register_script('jquery-js', plugins_url('area_riservata/js/jquery-3.2.1.min.js'), array('jquery'), '1.0', false);
+    //wp_register_script('jquery-js', plugins_url('area_riservata/js/jquery-3.2.1.min.js'), array('jquery'), '1.0', false);
     wp_register_script('ui-widget-js', plugins_url('area_riservata/js/jquery-ui.min.js'), array('jquery'), '1.0', false);       
     wp_register_script('file-input', plugins_url('area_riservata/js/fileinput.min.js'), array('jquery'), '1.0', false); 
     wp_register_script('livequery', plugins_url('area_riservata/js/jquery.livequery.js'), array('jquery'), '1.0', false);       
     wp_register_script('script', plugins_url('area_riservata/js/script.js'), array('jquery'), '1.0', false);   
       
-    wp_enqueue_script('jquery-js'); 
+    //wp_enqueue_script('jquery-js'); 
     wp_enqueue_script('ui-widget-js'); 
     wp_enqueue_script('file-input'); 
     wp_enqueue_script('livequery');
